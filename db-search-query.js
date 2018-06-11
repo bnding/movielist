@@ -1,5 +1,5 @@
 var myKey = "?api_key=e4e9e04c03e2d95d7a34af57b478c084";
-var baseMovieURL = "http://api.themoviedb.org/3/search/movie";
+var baseMovieURL = "https://api.themoviedb.org/3/search/movie";
 var query = "&query=";
 
 var movieID = "/";
@@ -19,13 +19,15 @@ $(document).ready(function(){
 	var value;
 	var currentQuery;
 	var movies = new Array();
-	var jsonOut;
+	var json;
 
 
 	$("#searchButton").click(function(){
-					// alert(jsonOut[0].id);
-					var movieSearchID = baseMovieURL+myKey+query+movies[0];
+					var specificMovie = "https://api.themoviedb.org/3/movie";
+					var movieSearchID = specificMovie+movieID + json.results[0].id + myKey;
+					alert(movieSearchID);
 					// alert(movieSearchID);
+					// window.location.href = "newpage.html";
 					window.open(movieSearchID, "_blank");
 					window.focus();
 				});
@@ -44,6 +46,8 @@ $(document).ready(function(){
 						movies.push(jsonOut.results[i].original_title)
 						// console.log(movies);
 					}
+
+					json = jsonOut;
 				});
 
 				$("#searchTerm").autocomplete({
